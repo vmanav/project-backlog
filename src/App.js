@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import './App.css';
 
-import { Container, Grid, makeStyles, Paper, useTheme, CssBaseline, AppBar, Toolbar, ListItemText, IconButton, Drawer, Typography, Divider, List, ListItem, ListItemIcon } from '@material-ui/core';
-import { Check, Menu, Inbox, Mail, ChevronLeft, ChevronRight } from '@material-ui/icons';
+import { Container, Grid, makeStyles, Paper, Button, FormControl, Input, InputLabel, InputAdornment, useTheme, TextField, CssBaseline, AppBar, Toolbar, ListItemText, IconButton, Drawer, Typography, Divider, List, ListItem, ListItemIcon } from '@material-ui/core';
+import { Check, Menu, Inbox, Mail, ChevronLeft, Delete, ChevronRight } from '@material-ui/icons';
 import { ToggleButton } from '@material-ui/lab';
 import { yellow } from '@material-ui/core/colors';
 import clsx from 'clsx';
 
 
-const drawerWidth = 240;
+const drawerWidth = 200;
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     }),
   },
   menuButton: {
-    marginRight: theme.spacing(2),
+    marginRight: theme.spacing(1),
   },
   hide: {
     display: 'none',
@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
   drawerHeader: {
     display: 'flex',
     alignItems: 'center',
-    padding: theme.spacing(0, 1),
+    padding: theme.spacing(0),
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
     justifyContent: 'flex-end',
@@ -64,46 +64,58 @@ const useStyles = makeStyles((theme) => ({
     }),
     marginLeft: 0,
   },
+
+  // For COntaent
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  }
+
 }));
 
 
-function PersistentDrawerLeft() {
+function DrawerComponent() {
   const [open, setOpen] = useState(true);
   const classes = useStyles();
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
+  const handleDrawerToggle = () => {
+    setOpen(!open);
   };
 
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
+  // const handleDrawerClose = () => {
+  //   setOpen(false);
+  // };
   return (
     <div className={classes.root}>
+
       <CssBaseline />
+
       <AppBar
         position="fixed"
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open,
         })}
       >
-        <Toolbar>
+        <Toolbar
+
+        >
           <IconButton
             color="inherit"
             aria-label="open drawer"
-            onClick={handleDrawerOpen}
+            onClick={handleDrawerToggle}
             edge="start"
-            className={clsx(classes.menuButton, open && classes.hide)}
+            className={clsx(classes.menuButton)}
           >
             <Menu />
           </IconButton>
-          <Typography variant="h6" noWrap>
-            Persistent drawer
+          <Typography noWrap>
+            <TextField id="standard" placeholder="ListName" />
           </Typography>
         </Toolbar>
       </AppBar>
 
-
+      {/* Left Drawer  */}
       <Drawer
         className={classes.drawer}
         variant="persistent"
@@ -114,19 +126,21 @@ function PersistentDrawerLeft() {
         }}
       >
         <div className={classes.drawerHeader}>
-          <IconButton onClick={handleDrawerClose}>
+          <IconButton onClick={handleDrawerToggle}>
             <ChevronLeft />
           </IconButton>
         </div>
+
         <Divider />
         <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <Inbox /> : < Mail />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
+          <ListItem button key={Inbox}>
+            <ListItemIcon>
+              <Inbox />
+            </ListItemIcon>
+            <ListItemText primary={'All'} />
+          </ListItem>
         </List>
+
         <Divider />
         <List>
           {['All mail', 'Trash', 'Spam'].map((text, index) => (
@@ -135,6 +149,12 @@ function PersistentDrawerLeft() {
               <ListItemText primary={text} />
             </ListItem>
           ))}
+          <ListItem button key={'New List'}>
+            <ListItemIcon>
+              <Inbox />
+            </ListItemIcon>
+            <ListItemText primary={'New List'} />
+          </ListItem>
         </List>
       </Drawer>
 
@@ -142,18 +162,86 @@ function PersistentDrawerLeft() {
         className={clsx(classes.content, {
           [classes.contentShift]: open,
         })}
+        style={{ backgroundColor: 'yellow', height: '1000 px', padding: 0 }}
       >
         <div className={classes.drawerHeader} />
-        <Typography paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-          utfelis imperdiet proin fermentum
-        </Typography>
-        <Typography paragraph>
-          Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper eget nulla
-          facilisi etiam dignissim diam. Pulus sed virices sagittis orci a.
-        </Typography>
+        <Container style={{ backgroundColor: 'lightcyan', border: '1px solid black' }} maxWidth="lg">
+
+          <Grid container spacing={1} style={{ paddingTop: 10, paddingBottom: 10 }}>
+
+            <Grid item xs={12}
+            >
+              <Grid
+                container
+                direction="row"
+                justify="flex-end"
+                alignItems="center"
+              >
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  size="small"
+                  startIcon={<Delete />}
+                >
+                  Delete List
+              </Button>
+              </Grid>
+
+            </Grid>
+
+            <Grid item xs={12}>
+              <FormControl fullWidth size="medium" style={{ marginBottom: 6 }}>
+                <TextField id="outlined" label="Title" variant="outlined" placeholder="Enter Title here"
+                  size="small"
+                // onChange={}
+                />
+              </FormControl>
+              <Divider />
+            </Grid>
+            <Grid item xs={12}>
+              <Grid
+                container
+                spacing={1}
+                direction="row"
+                justify="flex-end"
+                alignItems="center"
+              >
+                <Grid item xs={1}>
+                  <FormControl fullWidth size="medium" style={{ marginBottom: 6 }}>
+                    <TextField id="outlined" label="Title" variant="outlined" placeholder="Enter Title here"
+                      size="small"
+                    // onChange={}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={2}>
+                  <Paper className={classes.paper}>xs=12 sm=6</Paper>
+                </Grid>
+                <Grid item xs={3}>
+                  <Paper className={classes.paper}>xs=12 sm=6</Paper>
+                </Grid>
+                <Grid item xs={3}>
+                  <Paper className={classes.paper}>xs=12 sm=6</Paper>
+                </Grid>
+                <Grid item xs={3}>
+                  <Paper className={classes.paper}>xs=12 sm=6</Paper>
+                </Grid>
+              </Grid>
+            </Grid>
+            <Grid item xs={3}>
+              <Paper className={classes.paper}>xs=12 sm=6</Paper>
+            </Grid>
+            <Grid item xs={12}>
+              <Paper className={classes.paper}>xs=12 sm=6</Paper>
+            </Grid>
+            <Grid item xs={12}>
+              <Paper className={classes.paper}>xs=12 sm=6</Paper>
+            </Grid>
+          </Grid>
+
+        </Container>
       </main>
-    </div>
+    </div >
   );
 }
 
@@ -165,10 +253,8 @@ function App() {
 
     <div className="App">
       <div className="Main">
-        <PersistentDrawerLeft />
-
+        <DrawerComponent />
       </div>
-
     </div>
 
   );

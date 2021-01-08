@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import {
-  Container, Grid, makeStyles, Paper, Button, FormControl, Dialog, ListItemAvatar, Avatar, DialogTitle, ButtonGroup, Input, Tooltip, InputLabel, TextareaAutosize, FormControlLabel,
+  Container, Grid, makeStyles, Paper, Button, FormControl, Snackbar, Dialog, ListItemAvatar, Avatar, DialogTitle, ButtonGroup, Input, Tooltip, InputLabel, TextareaAutosize, FormControlLabel,
   Checkbox, InputAdornment, useTheme, TextField, CssBaseline, AppBar, Toolbar, ListItemText, IconButton, Drawer, Typography, Divider, List, ListItem, ListItemIcon
 } from '@material-ui/core';
-import { Check, Menu, Inbox, Mail, ChevronLeft, Delete, ChevronRight, Person, Add, Edit, CheckBox, ViewComfy } from '@material-ui/icons';
+import { Check, Menu, Inbox, Mail, ChevronLeft, Delete, ChevronRight, Close, Person, Add, Edit, CheckBox, ViewComfy } from '@material-ui/icons';
 import { ToggleButton } from '@material-ui/lab';
+import MuiAlert from '@material-ui/lab/Alert';
+
 import { yellow } from '@material-ui/core/colors';
 import clsx from 'clsx';
+import NewListDialog from './NewListDialog';
 
 const useStyles = makeStyles((theme) => ({
   drawerHeader: {
@@ -18,42 +21,6 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'flex-end',
   }
 }));
-
-
-function SimpleDialog(props) {
-  const { onClose, open } = props;
-  const [newList, setNewList] = useState('');
-  const handleClose = () => {
-    onClose();
-  };
-
-  const handleAddNewList = (e) => {
-    console.log("Add new list : ", newList);
-    onClose();
-  }
-
-  return (
-    <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
-      <DialogTitle id="simple-dialog-title">Start a New List</DialogTitle>
-      <List>
-        <ListItem>
-          <TextField id="outlined" label="Title" variant="outlined" placeholder="Enter Title here"
-            size="small"
-            onChange={(e) => setNewList(e.target.value)}
-          />
-        </ListItem>
-        <ListItem onClick={handleAddNewList}>
-          <ListItemAvatar>
-            <Avatar>
-              <Add />
-            </Avatar>
-          </ListItemAvatar>
-          <ListItemText primary="Add account" />
-        </ListItem>
-      </List>
-    </Dialog>
-  );
-}
 
 export default function LeftDrawerContent() {
   const classes = useStyles();
@@ -96,6 +63,11 @@ export default function LeftDrawerContent() {
           <ListItem button key={text}>
             <ListItemIcon>{index % 2 === 0 ? <Inbox /> : < Mail />}</ListItemIcon>
             <ListItemText primary={text} />
+            <IconButton aria-label="delete" size="small">
+              <Tooltip title="Delete All" placement="right" arrow>
+                <Delete />
+              </Tooltip>
+            </IconButton>
           </ListItem>
         ))}
       </List>
@@ -109,7 +81,7 @@ export default function LeftDrawerContent() {
           </ListItemIcon>
           <ListItemText primary={'New List'} />
         </ListItem>
-        <SimpleDialog open={newListModalOpen} onClose={handleNewListModalClose} />
+        <NewListDialog open={newListModalOpen} onClose={handleNewListModalClose} />
       </List>
     </>
   );

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   Container, Grid, makeStyles, Paper, Button, FormControl, Snackbar, Dialog, ListItemAvatar, Avatar, DialogTitle, ButtonGroup, Input, Tooltip, InputLabel, TextareaAutosize, FormControlLabel,
   Checkbox, InputAdornment, useTheme, TextField, CssBaseline, AppBar, Toolbar, ListItemText, IconButton, Drawer, Typography, Divider, List, ListItem, ListItemIcon
@@ -10,6 +10,8 @@ import MuiAlert from '@material-ui/lab/Alert';
 import { yellow } from '@material-ui/core/colors';
 import clsx from 'clsx';
 
+import { GlobalContext } from '../context/GlobalState';
+
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -20,15 +22,22 @@ export default function NewListDialog(props) {
   const [newList, setNewList] = useState('');
   const [snkBarOpen, setSnkBarOpen] = useState(false);
 
+  const { addList
+    // , setSelectedList
+  } = useContext(GlobalContext);
+
   const handleClose = () => {
     onClose();
   };
 
   const handleAddNewList = () => {
-    console.log("Add new list : ", newList);
+    console.log("handleAddNewList CALLED: ", newList);
+    // console.log("typeof newList : ", typeof newList)
     if (newList === '') {
       setSnkBarOpen(true);
     } else {
+      addList(newList);
+      // setSelectedList(newList);
       onClose();
     }
   }

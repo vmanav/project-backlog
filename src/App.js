@@ -1,14 +1,18 @@
 import React from 'react';
 import './App.css';
 import DrawerComponent from './components/DrawerComponent';
+import { GlobalProvider } from './context/GlobalState';
+
 
 function App() {
   return (
-    <div className="App">
-      <div className="Main">
-        <DrawerComponent />
+    <GlobalProvider>
+      <div className="App">
+        <div className="Main">
+          <DrawerComponent />
+        </div>
       </div>
-    </div>
+    </GlobalProvider>
   );
 }
 

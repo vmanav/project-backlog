@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
 	Container, Grid, makeStyles, Paper, Button, FormControl, ButtonGroup, Input, InputLabel, TextareaAutosize, FormControlLabel,
 	Checkbox, InputAdornment, useTheme, TextField, CssBaseline, AppBar, Toolbar, ListItemText, IconButton, Drawer, Typography, Divider, List, ListItem, ListItemIcon
@@ -10,6 +10,8 @@ import clsx from 'clsx';
 
 import LeftDrawerContent from './LeftDrawerContent';
 import AppContainer from './AppContainer';
+
+import { GlobalContext } from '../context/GlobalState';
 
 const drawerWidth = 200;
 const useStyles = makeStyles((theme) => ({
@@ -78,8 +80,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function DrawerComponent() {
 	const [open, setOpen] = useState(true);
-	const [listSelected, setListSelected] = useState(false);
-	const [selectedList, setselectedList] = useState({ name: "My List", data: [] });
+
+	const { selectedList } = useContext(GlobalContext);
+	console.log("SELECTED LIST : ", selectedList)
+
 
 	const classes = useStyles();
 
@@ -109,13 +113,16 @@ export default function DrawerComponent() {
 					</IconButton>
 					{/* TopNavBar ListName */}
 					<Typography noWrap>
-						{listSelected ? (<TextField id="standard" placeholder="ListName" />) : (<TextField
-							id="standard-read-only-input"
-							defaultValue={selectedList.name}
-							InputProps={{
-								readOnly: true,
-							}}
-						/>)}
+						{selectedList === '' ?
+							(<Typography variant="h5" >
+								"PLAESAE SELECT A ALIST"
+							</Typography >
+							) :
+							(<Typography variant="h5" >
+								{selectedList}
+							</Typography>
+							)
+						}
 					</Typography>
 				</Toolbar>
 			</AppBar>

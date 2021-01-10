@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   Container, Grid, makeStyles, Paper, Button, FormControl, ButtonGroup, Input, InputLabel, TextareaAutosize, FormControlLabel,
   Checkbox, InputAdornment, useTheme, TextField, CssBaseline, AppBar, Toolbar, ListItemText, IconButton, Drawer, Typography, Divider, List, ListItem, ListItemIcon
@@ -7,6 +7,8 @@ import { Check, Menu, Inbox, Mail, ChevronLeft, Delete, ChevronRight, Add, Edit,
 import { ToggleButton } from '@material-ui/lab';
 import { yellow } from '@material-ui/core/colors';
 import clsx from 'clsx';
+
+import { GlobalContext } from '../context/GlobalState';
 
 import AddTodo from './AddTdodo';
 import TodoList from './TodoList';
@@ -21,47 +23,64 @@ const StrongDivider = () => (
 
 export default function AppContainer() {
 
-  return (
-    <Container style={{ backgroundColor: 'lightcyan', border: '1px solid black' }} maxWidth="lg">
+  const { selectedList, list } = useContext(GlobalContext);
 
-      <Grid container spacing={1} style={{ paddingTop: 10, paddingBottom: 10 }}>
+  if (selectedList === '') {
+    return (
+      <Container style={{ backgroundColor: 'lightcyan', border: '1px solid black' }} maxWidth="lg">
+        >
+        SELECT A LIST PLEASE
+      </Container>
+    )
+  }
+  else {
 
-        {/* 3 Buttons */}
-        <Grid item xs={12}>
-          <Grid
-            container
-            direction="row"
-            justify="flex-end"
-            alignItems="center"
-          >
-            <ButtonGroup color="secondary" aria-label="outlined secondary button group">
-              <IconButton aria-label="delete" size="small">
-                <Delete />
-              </IconButton>
-              <IconButton aria-label="delete" size="small">
-                <CheckBox />
-              </IconButton>
-              <IconButton aria-label="delete" size="small">
-                <ViewComfy />
-              </IconButton>
-            </ButtonGroup>
+
+    return (
+      <Container style={{ backgroundColor: 'lightcyan', border: '1px solid black' }} maxWidth="lg">
+
+        <Grid container spacing={1} style={{ paddingTop: 10, paddingBottom: 10 }}>
+
+          {/* 3 Buttons */}
+          <Grid item xs={12}>
+            <Grid
+              container
+              direction="row"
+              justify="flex-end"
+              alignItems="center"
+            >
+              <ButtonGroup color="secondary" aria-label="outlined secondary button group">
+                <IconButton aria-label="delete" size="small">
+                  <Delete />
+                </IconButton>
+                <IconButton aria-label="delete" size="small">
+                  <CheckBox />
+                </IconButton>
+                <IconButton aria-label="delete" size="small">
+                  <ViewComfy />
+                </IconButton>
+              </ButtonGroup>
+            </Grid>
           </Grid>
+
+          {/* Todo Input  */}
+          <Grid item xs={12}>
+            <AddTodo />
+          </Grid>
+
+          {/* TodoList*/}
+          <Grid item xs={12} style={{ backgroundColor: 'lightgreen' }}>
+            {
+              list.filter((l) => l.listName === selectedList)[0].data.map((todoItem) => {
+                return (
+                  <TodoList data={todoItem} key={todoItem.name} />
+                )
+              })
+            }
+          </Grid>
+
         </Grid>
 
-        {/* Todo Input  */}
-        <Grid item xs={12}>
-          <AddTodo />
-        </Grid>
-
-        {/* TodoList*/}
-        <Grid item xs={12} style={{ backgroundColor: 'lightgreen' }}>
-
-          <TodoList />
-          <TodoList />
-
-        </Grid>
-
-      </Grid>
-
-    </Container>)
+      </Container >)
+  }
 }

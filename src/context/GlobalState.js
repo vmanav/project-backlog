@@ -9,13 +9,15 @@ const initialState = {
     data: [{
       title: 'sampleTitle',
       desc: 'sampleDescription',
-      pointers: 'samplePointers, samplePointers, samplePointers',
-      ref: 'sampleRef.com, sampleRef.co'
+      pointers: 'samplePointers, samplePointers, samplePointers,inters, samplePointers,inters, samplePointers,interlePointers, samplePointers,inters, samplePointers,inters, samplePointers,inters, samplePointers,inters, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers',
+      ref: 'sampleRef.com, sampleRef.co',
+      completed: false
     }, {
       title: 'sampleTitle2',
       desc: 'sampleDescription2',
       pointers: 'samplePointers, samplePointers, samplePointers2',
-      ref: 'sampleRef2.com, sampleRef2.co'
+      ref: 'sampleRef2.com, sampleRef2.co',
+      completed: false
     }]
   },
   {
@@ -24,12 +26,14 @@ const initialState = {
       title: 'sampleTitle',
       desc: 'sampleDescription',
       pointers: 'samplePointers, samplePointers, samplePointers',
-      ref: 'sampleRef.com, sampleRef.co'
+      ref: 'sampleRef.com, sampleRef.co',
+      completed: false
     }, {
       title: 'sampleTitle2',
       desc: 'sampleDescription2',
       pointers: 'samplePointers, samplePointers, samplePointers2',
-      ref: 'sampleRef2.com, sampleRef2.co'
+      ref: 'sampleRef2.com, sampleRef2.co',
+      completed: false
     }]
   }]
 }

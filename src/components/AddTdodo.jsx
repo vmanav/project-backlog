@@ -9,7 +9,6 @@ import { yellow } from '@material-ui/core/colors';
 import clsx from 'clsx';
 import MuiAlert from '@material-ui/lab/Alert';
 
-
 const StrongDivider = () => (
   <>
     <Divider />

@@ -15,12 +15,16 @@ import { GlobalContext } from '../context/GlobalState';
 export default function Todo(props) {
   const { data } = props;
   const todoStatus = data.completed;
-  console.log("Data : ", data);
+  // console.log("Data : ", data);
 
-  const { todoStatusToggle } = useContext(GlobalContext);
+  const { todoStatusToggle, selectedList } = useContext(GlobalContext);
 
-  const handleTodoMark = () => {
-    todoStatusToggle();
+  const handleTodoMark = (todoId) => {
+    console.log("handleTodoMark CALLED");
+    todoStatusToggle({
+      listId: selectedList,
+      todoId: todoId
+    });
   }
 
   return (
@@ -39,7 +43,7 @@ export default function Todo(props) {
             control={
               <Checkbox
                 checked={todoStatus}
-                onChange={handleTodoMark}
+                onChange={() => handleTodoMark(data.id)}
                 name="checkedB"
                 color="primary"
               />

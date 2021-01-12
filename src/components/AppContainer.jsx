@@ -25,7 +25,7 @@ export default function AppContainer() {
 
   const { selectedList, list } = useContext(GlobalContext);
 
-  if (selectedList === '') {
+  if (selectedList === (-1)) {
     return (
       <Container style={{ backgroundColor: 'lightcyan', border: '1px solid black' }} maxWidth="lg">
         >
@@ -71,7 +71,7 @@ export default function AppContainer() {
           {/* TodoList*/}
           <Grid item xs={12} style={{ backgroundColor: 'lightgreen' }}>
             {
-              list.filter((l) => l.listName === selectedList)[0].data.map((todoItem) => {
+              list.filter((l) => l.id === selectedList)[0].data.map((todoItem) => {
                 return (
                   <Todo data={todoItem} key={todoItem.id} />
                 )

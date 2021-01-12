@@ -81,8 +81,8 @@ const useStyles = makeStyles((theme) => ({
 export default function DrawerComponent() {
 	const [open, setOpen] = useState(true);
 
-	const { selectedList } = useContext(GlobalContext);
-	console.log("SELECTED LIST : ", selectedList)
+	const { selectedList, list } = useContext(GlobalContext);
+	console.log("Selected List Id : ", selectedList)
 
 
 	const classes = useStyles();
@@ -113,13 +113,13 @@ export default function DrawerComponent() {
 					</IconButton>
 					{/* TopNavBar ListName */}
 					<Typography noWrap>
-						{selectedList === '' ?
+						{selectedList === (-1) ?
 							(<Typography variant="h5" >
-								"PLAESAE SELECT A ALIST"
+								"PLAESAE SELECT A ALIST dwaes"
 							</Typography >
 							) :
 							(<Typography variant="h5" >
-								{selectedList}
+								{list.filter((l) => l.id === selectedList)[0].listName}
 							</Typography>
 							)
 						}

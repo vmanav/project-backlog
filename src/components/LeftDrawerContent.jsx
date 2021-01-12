@@ -30,8 +30,13 @@ export default function LeftDrawerContent() {
 
   const { list, deleteList, setSelectedList } = useContext(GlobalContext);
 
-  console.log("=====LIST : ", list);
-  const listNames = list.map((l) => l.listName);
+  console.log("LIST IN LEFT DRAWER: ", list);
+  const listNames = list.map((l) => {
+    return {
+      listName: l.listName,
+      listId: l.id
+    }
+  });
   // console.log("listNames : ", listNames);
 
   const handleNewListModalOpen = () => {
@@ -42,14 +47,13 @@ export default function LeftDrawerContent() {
     setnewListModalOpen(false);
   };
 
-  const handleDeleteList = (lName) => {
-    console.log("delete List : ", lName);
-    deleteList(lName);
+  const handleDeleteList = (e, listId) => {
+    e.stopPropagation();
+    deleteList(listId);
   }
 
-  const handleListItemClick = (lName) => {
-    console.log("CLADLL `lName` : ", lName);
-    setSelectedList(lName);
+  const handleListItemClick = (listId) => {
+    setSelectedList(listId);
   }
 
   return (
@@ -76,12 +80,12 @@ export default function LeftDrawerContent() {
 
       <Divider />
       <List>
-        {listNames.map((lName, index) => (
+        {listNames.map(({ listName, listId }, index) => (
           <>
-            <ListItem button key={lName} onClick={() => handleListItemClick(lName)}>
+            <ListItem button key={listId} onClick={() => handleListItemClick(listId)}>
               {/* <ListItemIcon>{index % 2 === 0 ? <Inbox /> : < Mail />}</ListItemIcon> */}
-              <ListItemText primary={lName} />
-              <IconButton aria-label="delete" size="small" onClick={() => handleDeleteList(lName)}>
+              <ListItemText primary={listName} />
+              <IconButton aria-label="delete" size="small" onClick={(e) => handleDeleteList(e, listId)}>
                 <Tooltip title="Delete List" placement="right" arrow>
                   <Delete />
                 </Tooltip>

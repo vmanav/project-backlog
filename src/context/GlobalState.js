@@ -3,8 +3,8 @@ import AppReducer from './AppReducer';
 
 // Initial State
 const initialState = {
-  selectedList: '',
-  len: 1,
+  selectedList: -1,
+  llen: 1,
   list: [{
     listName: 'random',
     len: 1,
@@ -28,7 +28,7 @@ const initialState = {
   {
     listName: 'secondRandom',
     len: 1,
-    id: 0,
+    id: 1,
     data: [{
       title: 'sampleTitle',
       desc: 'sampleDescription',
@@ -71,20 +71,20 @@ export const GlobalProvider = ({ children }) => {
     })
   }
 
-  function deleteList(listName) {
+  function deleteList(listId) {
     dispatch({
       type: 'DELETE_LIST',
       payload: {
-        listName: listName
+        listId: listId
       }
     })
   }
 
-  function setSelectedList(listName) {
+  function setSelectedList(listId) {
     dispatch({
       type: 'SET_SELECTED_LIST',
       payload: {
-        listName: listName
+        listId: listId
       }
     })
   }

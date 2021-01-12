@@ -4,36 +4,45 @@ import AppReducer from './AppReducer';
 // Initial State
 const initialState = {
   selectedList: '',
+  len: 1,
   list: [{
     listName: 'random',
+    len: 1,
+    id: 0,
     data: [{
       title: 'sampleTitle',
       desc: 'sampleDescription',
       pointers: 'samplePointers, samplePointers, samplePointers,inters, samplePointers,inters, samplePointers,interlePointers, samplePointers,inters, samplePointers,inters, samplePointers,inters, samplePointers,inters, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers',
       ref: 'sampleRef.com, sampleRef.co',
-      completed: false
+      completed: true,
+      id: 0
     }, {
       title: 'sampleTitle2',
       desc: 'sampleDescription2',
       pointers: 'samplePointers, samplePointers, samplePointers2',
       ref: 'sampleRef2.com, sampleRef2.co',
-      completed: false
+      completed: false,
+      id: 1
     }]
   },
   {
     listName: 'secondRandom',
+    len: 1,
+    id: 0,
     data: [{
       title: 'sampleTitle',
       desc: 'sampleDescription',
       pointers: 'samplePointers, samplePointers, samplePointers',
       ref: 'sampleRef.com, sampleRef.co',
-      completed: false
+      completed: false,
+      id: 0
     }, {
       title: 'sampleTitle2',
       desc: 'sampleDescription2',
       pointers: 'samplePointers, samplePointers, samplePointers2',
       ref: 'sampleRef2.com, sampleRef2.co',
-      completed: false
+      completed: false,
+      id: 1
     }]
   }]
 }
@@ -80,13 +89,24 @@ export const GlobalProvider = ({ children }) => {
     })
   }
 
+  function todoStatusToggle({ listId, todoId }) {
+    dispatch({
+      type: 'TODO_STATUS_TOGGLE',
+      payload: {
+        listId: listId,
+        todoId: todoId
+      }
+    })
+  }
+
   return (
     <GlobalContext.Provider value={{
       list: state.list,
       selectedList: state.selectedList,
       addList,
       deleteList,
-      setSelectedList
+      setSelectedList,
+      todoStatusToggle
     }}>
       {children}
     </GlobalContext.Provider>

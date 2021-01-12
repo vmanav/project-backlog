@@ -11,7 +11,7 @@ import clsx from 'clsx';
 import { GlobalContext } from '../context/GlobalState';
 
 import AddTodo from './AddTdodo';
-import TodoList from './TodoList';
+import Todo from './Todo';
 
 
 const StrongDivider = () => (
@@ -73,7 +73,7 @@ export default function AppContainer() {
             {
               list.filter((l) => l.listName === selectedList)[0].data.map((todoItem) => {
                 return (
-                  <TodoList data={todoItem} key={todoItem.name} />
+                  <Todo data={todoItem} key={todoItem.id} />
                 )
               })
             }

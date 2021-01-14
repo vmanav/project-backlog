@@ -33,11 +33,58 @@ export default (state, action) => {
         if (state.list[i].id === action.payload.listId) {
           for (let j in state.list[i].data) {
             if (state.list[i].data[j].id === action.payload.todoId) {
-              console.log("UPDATE @ lid:", action.payload.listId, ", tid:", action.payload.todoId);
+              // console.log("UPDATE @ lid:", action.payload.listId, ", tid:", action.payload.todoId);
               state.list[i].data[j].completed = !state.list[i].data[j].completed;
               break;
             }
           }
+          break;
+        }
+      }
+      return {
+        ...state
+      }
+    }
+    case 'ADD_TODO': {
+      for (let i in state.list) {
+        if (state.list[i].id === action.payload.selectedList) {
+          state.list[i].data.push({
+            title: action.payload.title,
+            desc: action.payload.desc,
+            pointers: action.payload.pointers,
+            ref: action.payload.ref,
+            completed: false,
+            id: state.list[i].len + 1
+          });
+          state.list[i].len += 1;
+          break;
+        }
+      }
+      return {
+        ...state
+      }
+    }
+    case 'DELETE_TODO': {
+      for (let i in state.list) {
+        if (state.list[i].id === action.payload.listId) {
+          const newTodos = state.list[i].data.filter((t) => t.id !== action.payload.todoId)
+          // state.list[i].len -= 1;
+          state.list[i].data = newTodos
+          break;
+        }
+      }
+      return {
+        ...state
+      }
+    }
+    case 'DELETE_ALL_TODO': {
+      for (let i in state.list) {
+        console.log("listItem : ", state.list[i]);
+        console.log("action.payload.listId = ", action.payload.listId)
+        if (state.list[i].id === action.payload.listId) {
+          console.log("FFound")
+          state.list[i].data = [];
+          state.list[i].len = -1;
           break;
         }
       }

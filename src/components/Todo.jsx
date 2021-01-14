@@ -17,13 +17,19 @@ export default function Todo(props) {
   const todoStatus = data.completed;
   // console.log("Data : ", data);
 
-  const { todoStatusToggle, selectedList } = useContext(GlobalContext);
+  const { todoStatusToggle, selectedList, deleteTodo } = useContext(GlobalContext);
 
   const handleTodoMark = (todoId) => {
-    console.log("handleTodoMark CALLED");
     todoStatusToggle({
       listId: selectedList,
       todoId: todoId
+    });
+  }
+
+  const handleTodoDelete = (todoId) => {
+    deleteTodo({
+      listId: selectedList,
+      todoId: data.id
     });
   }
 
@@ -76,7 +82,7 @@ export default function Todo(props) {
               <IconButton aria-label="delete">
                 <Edit />
               </IconButton>
-              <IconButton aria-label="delete">
+              <IconButton aria-label="delete" onClick={handleTodoDelete}>
                 <Delete />
               </IconButton>
             </ButtonGroup>

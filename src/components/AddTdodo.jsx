@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   Container, Grid, makeStyles, Paper, Button, FormControl, ButtonGroup, Input, Snackbar, InputLabel, TextareaAutosize, FormControlLabel,
   Checkbox, InputAdornment, useTheme, TextField, CssBaseline, AppBar, Toolbar, ListItemText, IconButton, Drawer, Typography, Divider, List, ListItem, ListItemIcon
@@ -8,6 +8,8 @@ import { ToggleButton } from '@material-ui/lab';
 import { yellow } from '@material-ui/core/colors';
 import clsx from 'clsx';
 import MuiAlert from '@material-ui/lab/Alert';
+
+import { GlobalContext } from '../context/GlobalState';
 
 const StrongDivider = () => (
   <>
@@ -27,6 +29,9 @@ export default function AddTodo() {
   const [ref, setRef] = useState('');
   const [errorSnkBarOpen, setErrorSnkBarOpen] = useState(false);
 
+  const { addTodo, selectedList } = useContext(GlobalContext);
+
+
   const handleSnkBarClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
@@ -34,10 +39,12 @@ export default function AddTodo() {
     setErrorSnkBarOpen(false);
   };
 
-  const addTodo = () => {
+  const handleTodoAddClick = () => {
     console.log("Creating a Todo : ", title, desc, pointers, ref);
     if (title === '') {
       setErrorSnkBarOpen(true);
+    } else {
+      addTodo({ title, desc, pointers, ref, selectedList })
     }
   }
 
@@ -100,7 +107,7 @@ export default function AddTodo() {
           </FormControl>
         </Grid>
         <Grid item xs={1}>
-          <IconButton aria-label="addproject" onClick={addTodo}>
+          <IconButton aria-label="addproject" onClick={handleTodoAddClick}>
             <Add />
           </IconButton>
         </Grid>

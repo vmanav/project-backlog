@@ -23,7 +23,12 @@ const StrongDivider = () => (
 
 export default function AppContainer() {
 
-  const { selectedList, list } = useContext(GlobalContext);
+  const { selectedList, list, deleteAllTodo } = useContext(GlobalContext);
+
+  const handleDeleteAllTodo = () => {
+    deleteAllTodo({ listId: selectedList });
+  }
+
 
   if (selectedList === (-1)) {
     return (
@@ -50,7 +55,7 @@ export default function AppContainer() {
               alignItems="center"
             >
               <ButtonGroup color="secondary" aria-label="outlined secondary button group">
-                <IconButton aria-label="delete" size="small">
+                <IconButton aria-label="delete" size="small" onClick={handleDeleteAllTodo}>
                   <Delete />
                 </IconButton>
                 <IconButton aria-label="delete" size="small">

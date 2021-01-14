@@ -99,6 +99,38 @@ export const GlobalProvider = ({ children }) => {
     })
   }
 
+  function addTodo({ title, desc, pointers, ref, selectedList }) {
+    dispatch({
+      type: 'ADD_TODO',
+      payload: {
+        title: title,
+        desc: desc,
+        pointers: pointers,
+        ref: ref,
+        selectedList: selectedList
+      }
+    })
+  }
+
+  function deleteTodo({ listId, todoId }) {
+    dispatch({
+      type: 'DELETE_TODO',
+      payload: {
+        listId: listId,
+        todoId: todoId
+      }
+    })
+  }
+  function deleteAllTodo({ listId }) {
+    console.log("INCOMING listId : ", listId)
+    dispatch({
+      type: 'DELETE_ALL_TODO',
+      payload: {
+        listId: listId,
+      }
+    })
+  }
+
   return (
     <GlobalContext.Provider value={{
       list: state.list,
@@ -106,7 +138,10 @@ export const GlobalProvider = ({ children }) => {
       addList,
       deleteList,
       setSelectedList,
-      todoStatusToggle
+      todoStatusToggle,
+      addTodo,
+      deleteTodo,
+      deleteAllTodo
     }}>
       {children}
     </GlobalContext.Provider>

@@ -68,7 +68,7 @@ export default function NewListDialog(props) {
                 <Add />
               </Avatar>
             </ListItemAvatar>
-            <ListItemText primary="Add account" />
+            <ListItemText primary="Add New List" />
           </ListItem>
         </List>
       </Dialog>

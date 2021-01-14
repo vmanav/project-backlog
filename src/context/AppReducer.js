@@ -27,27 +27,24 @@ export default (state, action) => {
         ...state,
         selectedList: action.payload.listId
       }
-    // case 'TODO_STATUS_TOGGLE': {
-    //   const newList = state.list.map((l) => {
-    //     if (l.id === action.payload.listId) {
-    //       l.data.map((t) => {
-    //         if (t.id === action.payload.todoId) {
-    //           t.completed = !t.completed;
-    //           return t;
-    //         } else {
-    //           return t;
-    //         }
-    //       })
-    //     } else {
-    //       return l;
-    //     }
-    //   })
-    //   console.log("newList : ", newList);
-    //   return {
-    //     ...state,
-    //     list: newList
-    //   }
-    // }
+    case 'TODO_STATUS_TOGGLE': {
+      for (let i in state.list) {
+        // console.log("listItem : ", l);
+        if (state.list[i].id === action.payload.listId) {
+          for (let j in state.list[i].data) {
+            if (state.list[i].data[j].id === action.payload.todoId) {
+              console.log("UPDATE @ lid:", action.payload.listId, ", tid:", action.payload.todoId);
+              state.list[i].data[j].completed = !state.list[i].data[j].completed;
+              break;
+            }
+          }
+          break;
+        }
+      }
+      return {
+        ...state
+      }
+    }
     // case 'ADD_TRANSACTION':
     //   return {
     //     ...state,

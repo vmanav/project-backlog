@@ -5,6 +5,7 @@ import AppReducer from './AppReducer';
 const initialState = {
   selectedList: -1,
   llen: 1,
+  viewNotCompleted: true,
   list: [{
     listName: 'random',
     len: 1,
@@ -146,10 +147,17 @@ export const GlobalProvider = ({ children }) => {
     })
   }
 
+  function showTodoToggle() {
+    dispatch({
+      type: 'SHOW_TODO_TOGGLE',
+    })
+  }
+
   return (
     <GlobalContext.Provider value={{
       list: state.list,
       selectedList: state.selectedList,
+      viewNotCompleted: state.viewNotCompleted,
       addList,
       deleteList,
       setSelectedList,
@@ -157,7 +165,8 @@ export const GlobalProvider = ({ children }) => {
       addTodo,
       deleteTodo,
       deleteAllTodo,
-      editTodo
+      editTodo,
+      showTodoToggle
     }}>
       {children}
     </GlobalContext.Provider>

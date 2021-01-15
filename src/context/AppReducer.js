@@ -112,6 +112,13 @@ export default (state, action) => {
         ...state
       }
     }
+
+    case 'SHOW_TODO_TOGGLE': {
+      return {
+        ...state,
+        viewNotCompleted: !state.viewNotCompleted
+      }
+    }
     // case 'ADD_TRANSACTION':
     //   return {
     //     ...state,

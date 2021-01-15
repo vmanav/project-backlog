@@ -1,9 +1,11 @@
 import React, { useState, useContext } from 'react';
 import {
-  Container, Grid, makeStyles, Paper, Button, FormControl, ButtonGroup, Input, InputLabel, TextareaAutosize, FormControlLabel,
+  Container, Grid, makeStyles, Paper, Button, FormControl, ButtonGroup, Input, InputLabel, Tooltip, TextareaAutosize, FormControlLabel,
   Checkbox, InputAdornment, useTheme, TextField, CssBaseline, AppBar, Toolbar, ListItemText, IconButton, Drawer, Typography, Divider, List, ListItem, ListItemIcon
 } from '@material-ui/core';
 import { Check, Menu, Inbox, Mail, ChevronLeft, Delete, ChevronRight, Add, Edit, CheckBox, ViewComfy } from '@material-ui/icons';
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
+import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import { ToggleButton } from '@material-ui/lab';
 import { yellow } from '@material-ui/core/colors';
 import clsx from 'clsx';
@@ -23,12 +25,16 @@ const StrongDivider = () => (
 
 export default function AppContainer() {
 
-  const { selectedList, list, deleteAllTodo } = useContext(GlobalContext);
+  const { selectedList, list, deleteAllTodo, viewNotCompleted, showTodoToggle } = useContext(GlobalContext);
 
   const handleDeleteAllTodo = () => {
     deleteAllTodo({ listId: selectedList });
   }
 
+  const handleTodoShow = () => {
+    console.log("handleTodoShow CALLED");
+    showTodoToggle();
+  }
 
   if (selectedList === (-1)) {
     return (
@@ -56,10 +62,20 @@ export default function AppContainer() {
             >
               <ButtonGroup color="secondary" aria-label="outlined secondary button group">
                 <IconButton aria-label="delete" size="small" onClick={handleDeleteAllTodo}>
-                  <Delete />
+                  <Tooltip title="Delete All Todos" placement="top" arrow>
+                    <Delete />
+                  </Tooltip>
                 </IconButton>
-                <IconButton aria-label="delete" size="small">
-                  <CheckBox />
+                <IconButton aria-label="delete" size="small" onClick={() => handleTodoShow()}>
+                  {viewNotCompleted ? (
+                    <Tooltip title="Show Completed" placement="top" arrow>
+                      <CheckBoxOutlineBlankIcon />
+                    </Tooltip>
+                  ) : (
+                      <Tooltip title="Show Pending" placement="top" arrow>
+                        <CheckBoxIcon />
+                      </Tooltip>
+                    )}
                 </IconButton>
                 <IconButton aria-label="delete" size="small">
                   <ViewComfy />
@@ -77,9 +93,13 @@ export default function AppContainer() {
           <Grid item xs={12} style={{ backgroundColor: 'lightgreen' }}>
             {
               list.filter((l) => l.id === selectedList)[0].data.map((todoItem) => {
-                return (
-                  <Todo data={todoItem} key={todoItem.id} />
-                )
+                if (viewNotCompleted !== todoItem.completed) {
+                  return (
+                    <Todo data={todoItem} key={todoItem.id} />
+                  )
+                } else {
+                  return <></>
+                }
               })
             }
           </Grid>

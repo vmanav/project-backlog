@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import {
-  Container, Grid, makeStyles, Paper, Button, Box, FormControl, ButtonGroup, Input, InputLabel, TextareaAutosize, FormControlLabel,
+  Container, Grid, makeStyles, Paper, Button, Box, FormControl, ButtonGroup, Input, InputLabel, Tooltip, TextareaAutosize, FormControlLabel,
   Checkbox, InputAdornment, useTheme, TextField, CssBaseline, AppBar, Toolbar, ListItemText, IconButton, Drawer, Typography, Divider, List, ListItem, ListItemIcon
 } from '@material-ui/core';
 import { Check, Menu, Inbox, Mail, ChevronLeft, Delete, ChevronRight, Add, Edit, CheckBox, ViewComfy } from '@material-ui/icons';
@@ -94,10 +94,14 @@ export default function Todo(props) {
           <FormControl fullWidth size="medium">
             <ButtonGroup color="secondary" aria-label="outlined secondary button group">
               <IconButton aria-label="edit" onClick={handleTodoEdit}>
-                <Edit />
+                <Tooltip title="Edit Todo" placement="top" arrow>
+                  <Edit />
+                </Tooltip>
               </IconButton>
               <IconButton aria-label="delete" onClick={handleTodoDelete}>
-                <Delete />
+                <Tooltip title="Delete Todo" placement="top" arrow>
+                  <Delete />
+                </Tooltip>
               </IconButton>
             </ButtonGroup>
           </FormControl>

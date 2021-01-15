@@ -8,14 +8,24 @@ import { ToggleButton } from '@material-ui/lab';
 import { yellow } from '@material-ui/core/colors';
 import clsx from 'clsx';
 
+import EditTodoDialog from './EditTodoDialog';
 
 import { GlobalContext } from '../context/GlobalState';
-
 
 export default function Todo(props) {
   const { data } = props;
   const todoStatus = data.completed;
   // console.log("Data : ", data);
+
+  const [editTodoModalOpen, setEditTodoModalOpen] = useState(false);
+
+  const handleEditTodoModalOpen = () => {
+    setEditTodoModalOpen(true);
+  };
+
+  const handleEditTodoModalClose = (value) => {
+    setEditTodoModalOpen(false);
+  };
 
   const { todoStatusToggle, selectedList, deleteTodo } = useContext(GlobalContext);
 
@@ -31,6 +41,10 @@ export default function Todo(props) {
       listId: selectedList,
       todoId: data.id
     });
+  }
+
+  const handleTodoEdit = () => {
+    handleEditTodoModalOpen();
   }
 
   return (
@@ -79,7 +93,7 @@ export default function Todo(props) {
         <Grid item xs={2} style={{}}>
           <FormControl fullWidth size="medium">
             <ButtonGroup color="secondary" aria-label="outlined secondary button group">
-              <IconButton aria-label="delete">
+              <IconButton aria-label="edit" onClick={handleTodoEdit}>
                 <Edit />
               </IconButton>
               <IconButton aria-label="delete" onClick={handleTodoDelete}>
@@ -92,6 +106,7 @@ export default function Todo(props) {
 
       </Grid>
       <Divider />
+      <EditTodoDialog open={editTodoModalOpen} onClose={handleEditTodoModalClose} data={data} />
     </>
   )
 }

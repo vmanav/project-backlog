@@ -121,12 +121,27 @@ export const GlobalProvider = ({ children }) => {
       }
     })
   }
+
   function deleteAllTodo({ listId }) {
     console.log("INCOMING listId : ", listId)
     dispatch({
       type: 'DELETE_ALL_TODO',
       payload: {
         listId: listId,
+      }
+    })
+  }
+
+  function editTodo({ id, title, desc, pointers, ref, selectedList }) {
+    dispatch({
+      type: 'EDIT_TODO',
+      payload: {
+        title: title,
+        desc: desc,
+        pointers: pointers,
+        ref: ref,
+        selectedList: selectedList,
+        id: id
       }
     })
   }
@@ -141,7 +156,8 @@ export const GlobalProvider = ({ children }) => {
       todoStatusToggle,
       addTodo,
       deleteTodo,
-      deleteAllTodo
+      deleteAllTodo,
+      editTodo
     }}>
       {children}
     </GlobalContext.Provider>

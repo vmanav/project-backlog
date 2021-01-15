@@ -92,6 +92,26 @@ export default (state, action) => {
         ...state
       }
     }
+
+    case 'EDIT_TODO': {
+      for (let i in state.list) {
+        if (state.list[i].id === action.payload.selectedList) {
+          for (let j in state.list[i].data) {
+            if (state.list[i].data[j].id === action.payload.id) {
+              state.list[i].data[j].title = action.payload.title;
+              state.list[i].data[j].desc = action.payload.desc;
+              state.list[i].data[j].pointers = action.payload.pointers;
+              state.list[i].data[j].ref = action.payload.ref;
+              break;
+            }
+          }
+          break;
+        }
+      }
+      return {
+        ...state
+      }
+    }
     // case 'ADD_TRANSACTION':
     //   return {
     //     ...state,

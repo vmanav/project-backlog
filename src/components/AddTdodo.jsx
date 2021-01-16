@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import {
-  Container, Grid, makeStyles, Paper, Button, FormControl, ButtonGroup, Input, Snackbar, InputLabel, TextareaAutosize, FormControlLabel,
+  Container, Grid, makeStyles, Paper, Button, FormControl, ButtonGroup, Tooltip, Input, Snackbar, InputLabel, TextareaAutosize, FormControlLabel,
   Checkbox, InputAdornment, useTheme, TextField, CssBaseline, AppBar, Toolbar, ListItemText, IconButton, Drawer, Typography, Divider, List, ListItem, ListItemIcon
 } from '@material-ui/core';
 import { Check, Menu, Inbox, Mail, ChevronLeft, Delete, ChevronRight, Add, Edit, CheckBox, ViewComfy } from '@material-ui/icons';
@@ -108,7 +108,9 @@ export default function AddTodo() {
         </Grid>
         <Grid item xs={1}>
           <IconButton aria-label="addproject" onClick={handleTodoAddClick}>
-            <Add />
+            <Tooltip title="Add Todo" placement="right" arrow>
+              <Add />
+            </Tooltip>
           </IconButton>
         </Grid>
       </Grid>

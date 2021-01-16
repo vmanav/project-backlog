@@ -27,6 +27,14 @@ export default (state, action) => {
         ...state,
         selectedList: action.payload.listId
       }
+    case 'DELETE_ALL_LISTS':
+      return {
+        ...state,
+        selectedList: -1,
+        llen: -1,
+        viewNotCompleted: true,
+        list: []
+      }
     case 'TODO_STATUS_TOGGLE': {
       for (let i in state.list) {
         // console.log("listItem : ", l);

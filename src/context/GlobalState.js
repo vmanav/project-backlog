@@ -153,6 +153,13 @@ export const GlobalProvider = ({ children }) => {
     })
   }
 
+  function deleteAllLists() {
+    dispatch({
+      type: 'DELETE_ALL_LISTS',
+    })
+  }
+
+
   return (
     <GlobalContext.Provider value={{
       list: state.list,
@@ -160,6 +167,7 @@ export const GlobalProvider = ({ children }) => {
       viewNotCompleted: state.viewNotCompleted,
       addList,
       deleteList,
+      deleteAllLists,
       setSelectedList,
       todoStatusToggle,
       addTodo,

@@ -7,7 +7,7 @@ import { Check, Menu, Inbox, Mail, ChevronLeft, Delete, ChevronRight, Add, Edit,
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import { ToggleButton } from '@material-ui/lab';
-import { yellow } from '@material-ui/core/colors';
+import { yellow, blue, indigo, red } from '@material-ui/core/colors';
 import clsx from 'clsx';
 
 import { GlobalContext } from '../context/GlobalState';
@@ -38,17 +38,18 @@ export default function AppContainer() {
 
   if (selectedList === (-1)) {
     return (
-      <Container style={{ backgroundColor: 'lightcyan', border: '1px solid black' }} maxWidth="lg">
-        >
-        SELECT A LIST PLEASE
-      </Container>
+      <></>
+      // Container style={{ backgroundColor: 'lightcyan', border: '1px solid black' }} maxWidth="lg">
+      //   SELECT A LIST PLEASE
+      // </Container>
     )
   }
   else {
 
-
     return (
-      <Container style={{ backgroundColor: 'lightcyan', border: '1px solid black' }} maxWidth="lg">
+      <Container style={{
+        // backgroundColor: 'red', border: '1px solid black'
+      }} maxWidth="lg">
 
         <Grid container spacing={1} style={{ paddingTop: 10, paddingBottom: 10 }}>
 
@@ -61,25 +62,25 @@ export default function AppContainer() {
               alignItems="center"
             >
               <ButtonGroup color="secondary" aria-label="outlined secondary button group">
-                <IconButton aria-label="delete" size="small" onClick={handleDeleteAllTodo}>
-                  <Tooltip title="Delete All Todos" placement="top" arrow>
-                    <Delete />
-                  </Tooltip>
-                </IconButton>
                 <IconButton aria-label="delete" size="small" onClick={() => handleTodoShow()}>
                   {viewNotCompleted ? (
                     <Tooltip title="Show Completed" placement="top" arrow>
-                      <CheckBoxOutlineBlankIcon />
+                      <CheckBoxOutlineBlankIcon style={{ color: indigo[500] }} />
                     </Tooltip>
                   ) : (
                       <Tooltip title="Show Pending" placement="top" arrow>
-                        <CheckBoxIcon />
+                        <CheckBoxIcon style={{ color: indigo[500] }} />
                       </Tooltip>
                     )}
                 </IconButton>
-                <IconButton aria-label="delete" size="small">
-                  <ViewComfy />
+                <IconButton aria-label="delete" size="small" onClick={handleDeleteAllTodo}>
+                  <Tooltip title="Delete All Todos" placement="top" arrow>
+                    <Delete style={{ color: red[800] }} />
+                  </Tooltip>
                 </IconButton>
+                {/* <IconButton aria-label="delete" size="small">
+                  <ViewComfy />
+                </IconButton> */}
               </ButtonGroup>
             </Grid>
           </Grid>
@@ -90,7 +91,9 @@ export default function AppContainer() {
           </Grid>
 
           {/* TodoList*/}
-          <Grid item xs={12} style={{ backgroundColor: 'lightgreen' }}>
+          <Grid item xs={12} style={{
+            // backgroundColor: 'lightgreen'
+          }}>
             {
               list.filter((l) => l.id === selectedList)[0].data.map((todoItem) => {
                 if (viewNotCompleted !== todoItem.completed) {

@@ -114,13 +114,15 @@ export default function DrawerComponent() {
 					{/* TopNavBar ListName */}
 					<Typography noWrap>
 						{selectedList === (-1) ?
-							(<Typography variant="h5" >
-								"PLAESAE SELECT A ALIST dwaes"
-							</Typography >
+							(
+								<Typography variant="h6" display="block" gutterBottom>
+									Please Select an existing List or Create a New One.
+								</Typography>
 							) :
-							(<Typography variant="h5" >
-								{list.filter((l) => l.id === selectedList)[0].listName}
-							</Typography>
+							(
+								<Typography variant="h6">
+									{list.filter((l) => l.id === selectedList)[0].listName}
+								</Typography>
 							)
 						}
 					</Typography>
@@ -146,7 +148,7 @@ export default function DrawerComponent() {
 				className={clsx(classes.content, {
 					[classes.contentShift]: open,
 				})}
-				style={{ backgroundColor: 'yellow', height: '1000 px', padding: 0 }}
+				style={{ padding: 0 }}
 			>
 				<div className={classes.drawerHeader} />
 				<AppContainer />

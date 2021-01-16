@@ -87,10 +87,10 @@ export default (state, action) => {
     }
     case 'DELETE_ALL_TODO': {
       for (let i in state.list) {
-        console.log("listItem : ", state.list[i]);
-        console.log("action.payload.listId = ", action.payload.listId)
+        // console.log("listItem : ", state.list[i]);
+        // console.log("action.payload.listId = ", action.payload.listId)
         if (state.list[i].id === action.payload.listId) {
-          console.log("FFound")
+          // console.log("FFound")
           state.list[i].data = [];
           state.list[i].len = -1;
           break;
@@ -127,6 +127,11 @@ export default (state, action) => {
         viewNotCompleted: !state.viewNotCompleted
       }
     }
+
+    // case 'SET_FROM_LOCAL': {
+    //   console.log("action.payload.stateFromLocal =-> ", action.payload.stateFromLocal);
+    //   return { ...state }
+    // }
     // case 'ADD_TRANSACTION':
     //   return {
     //     ...state,

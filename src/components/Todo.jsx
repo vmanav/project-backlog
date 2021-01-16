@@ -1,12 +1,10 @@
 import React, { useState, useContext } from 'react';
 import {
-  Container, Grid, makeStyles, Paper, Button, Box, FormControl, ButtonGroup, Input, InputLabel, Tooltip, TextareaAutosize, FormControlLabel,
-  Checkbox, InputAdornment, useTheme, TextField, CssBaseline, AppBar, Toolbar, ListItemText, IconButton, Drawer, Typography, Divider, List, ListItem, ListItemIcon
+  Grid, Box, FormControl, ButtonGroup, Tooltip, FormControlLabel,
+  Checkbox, IconButton, Divider
 } from '@material-ui/core';
-import { Check, Menu, Inbox, Mail, ChevronLeft, Delete, ChevronRight, Add, Edit, CheckBox, ViewComfy } from '@material-ui/icons';
-import { ToggleButton } from '@material-ui/lab';
-import { yellow, amber, red, blue } from '@material-ui/core/colors';
-import clsx from 'clsx';
+import { Delete, Edit } from '@material-ui/icons';
+import { amber, red } from '@material-ui/core/colors';
 
 import EditTodoDialog from './EditTodoDialog';
 
@@ -23,7 +21,7 @@ export default function Todo(props) {
     setEditTodoModalOpen(true);
   };
 
-  const handleEditTodoModalClose = (value) => {
+  const handleEditTodoModalClose = () => {
     setEditTodoModalOpen(false);
   };
 
@@ -36,7 +34,7 @@ export default function Todo(props) {
     });
   }
 
-  const handleTodoDelete = (todoId) => {
+  const handleTodoDelete = () => {
     deleteTodo({
       listId: selectedList,
       todoId: data.id

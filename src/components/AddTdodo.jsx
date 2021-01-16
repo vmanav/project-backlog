@@ -1,12 +1,8 @@
 import React, { useState, useContext } from 'react';
 import {
-  Container, Grid, makeStyles, Paper, Button, FormControl, ButtonGroup, Tooltip, Input, Snackbar, InputLabel, TextareaAutosize, FormControlLabel,
-  Checkbox, InputAdornment, useTheme, TextField, CssBaseline, AppBar, Toolbar, ListItemText, IconButton, Drawer, Typography, Divider, List, ListItem, ListItemIcon
+  Grid, FormControl, Tooltip, Snackbar, TextField, IconButton, Divider
 } from '@material-ui/core';
-import { Check, Menu, Inbox, Mail, ChevronLeft, Delete, ChevronRight, Add, Edit, CheckBox, ViewComfy } from '@material-ui/icons';
-import { ToggleButton } from '@material-ui/lab';
-import { yellow } from '@material-ui/core/colors';
-import clsx from 'clsx';
+import { Add } from '@material-ui/icons';
 import MuiAlert from '@material-ui/lab/Alert';
 
 import { GlobalContext } from '../context/GlobalState';
@@ -40,7 +36,7 @@ export default function AddTodo() {
   };
 
   const handleTodoAddClick = () => {
-    console.log("Creating a Todo : ", title, desc, pointers, ref);
+    // console.log("Creating a Todo : ", title, desc, pointers, ref);
     if (title === '') {
       setErrorSnkBarOpen(true);
     } else {

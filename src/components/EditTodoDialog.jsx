@@ -1,15 +1,8 @@
 import React, { useState, useContext } from 'react';
 import {
-  Container, Grid, makeStyles, Paper, Button, FormControl, Snackbar, Dialog, ListItemAvatar, Avatar, DialogTitle, ButtonGroup, Input, Tooltip, InputLabel, TextareaAutosize, FormControlLabel,
-  Checkbox, InputAdornment, useTheme, TextField, CssBaseline, AppBar, Toolbar, ListItemText, IconButton, Drawer, Typography, Divider, List, ListItem, ListItemIcon
+  FormControl, Snackbar, Dialog, DialogTitle, TextField, ListItemText, Divider, List, ListItem
 } from '@material-ui/core';
-import { Check, Menu, Inbox, Mail, ChevronLeft, Delete, ChevronRight, Close, Save, Person, Add, Edit, CheckBox, ViewComfy } from '@material-ui/icons';
-import { ToggleButton } from '@material-ui/lab';
 import MuiAlert from '@material-ui/lab/Alert';
-
-
-import { yellow } from '@material-ui/core/colors';
-import clsx from 'clsx';
 
 import { GlobalContext } from '../context/GlobalState';
 
@@ -34,14 +27,6 @@ export default function EditTodoDialog(props) {
     onClose();
   };
 
-  const handleSaveTodo = () => {
-    if (title === '') {
-      setSnkBarOpen(true);
-    } else {
-      editTodo({ id: data.id, title, desc, pointers, ref, selectedList });
-      onClose();
-    }
-  }
 
   const handleSnkBarClose = (event, reason) => {
     if (reason === 'clickaway') {

@@ -1,14 +1,11 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import {
-  Container, Grid, makeStyles, Paper, Button, FormControl, ButtonGroup, Input, InputLabel, Tooltip, TextareaAutosize, FormControlLabel,
-  Checkbox, InputAdornment, useTheme, TextField, CssBaseline, AppBar, Toolbar, ListItemText, IconButton, Drawer, Typography, Divider, List, ListItem, ListItemIcon
+  Container, Grid, ButtonGroup, Tooltip, IconButton
 } from '@material-ui/core';
-import { Check, Menu, Inbox, Mail, ChevronLeft, Delete, ChevronRight, Add, Edit, CheckBox, ViewComfy } from '@material-ui/icons';
+import { Delete } from '@material-ui/icons';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
-import { ToggleButton } from '@material-ui/lab';
-import { yellow, blue, indigo, red } from '@material-ui/core/colors';
-import clsx from 'clsx';
+import { indigo, red } from '@material-ui/core/colors';
 
 import { GlobalContext } from '../context/GlobalState';
 
@@ -16,12 +13,6 @@ import AddTodo from './AddTdodo';
 import Todo from './Todo';
 
 
-const StrongDivider = () => (
-  <>
-    <Divider />
-    <Divider />
-  </>
-)
 
 export default function AppContainer() {
 
@@ -32,7 +23,7 @@ export default function AppContainer() {
   }
 
   const handleTodoShow = () => {
-    console.log("handleTodoShow CALLED");
+    // console.log("handleTodoShow CALLED");
     showTodoToggle();
   }
 

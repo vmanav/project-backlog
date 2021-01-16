@@ -1,14 +1,10 @@
 import React, { useState, useContext } from 'react';
 import {
-  Container, Grid, makeStyles, Paper, Button, FormControl, Snackbar, Dialog, ListItemAvatar, Avatar, DialogTitle, ButtonGroup, Input, Tooltip, InputLabel, TextareaAutosize, FormControlLabel,
-  Checkbox, InputAdornment, useTheme, TextField, CssBaseline, AppBar, Toolbar, ListItemText, IconButton, Drawer, Typography, Divider, List, ListItem, ListItemIcon
+  Snackbar, Dialog, ListItemAvatar, Avatar, DialogTitle, TextField, ListItemText, List, ListItem
 } from '@material-ui/core';
-import { Check, Menu, Inbox, Mail, ChevronLeft, Delete, ChevronRight, Close, Person, Add, Edit, CheckBox, ViewComfy } from '@material-ui/icons';
-import { ToggleButton } from '@material-ui/lab';
+import { Add } from '@material-ui/icons';
 import MuiAlert from '@material-ui/lab/Alert';
 
-import { yellow } from '@material-ui/core/colors';
-import clsx from 'clsx';
 
 import { GlobalContext } from '../context/GlobalState';
 

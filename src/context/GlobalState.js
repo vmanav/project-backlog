@@ -6,46 +6,48 @@ const initialState = {
   selectedList: -1,
   llen: 1,
   viewNotCompleted: true,
-  list: [{
-    listName: 'random',
-    len: 1,
-    id: 0,
-    data: [{
-      title: 'sampleTitle',
-      desc: 'sampleDescription',
-      pointers: 'samplePointers, samplePointers, samplePointers,inters, samplePointers,inters, samplePointers,interlePointers, samplePointers,inters, samplePointers,inters, samplePointers,inters, samplePointers,inters, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers',
-      ref: 'sampleRef.com, sampleRef.co',
-      completed: true,
-      id: 0
-    }, {
-      title: 'sampleTitle2',
-      desc: 'sampleDescription2',
-      pointers: 'samplePointers, samplePointers, samplePointers2',
-      ref: 'sampleRef2.com, sampleRef2.co',
-      completed: false,
-      id: 1
-    }]
-  },
-  {
-    listName: 'secondRandom',
-    len: 1,
-    id: 1,
-    data: [{
-      title: 'sampleTitle',
-      desc: 'sampleDescription',
-      pointers: 'samplePointers, samplePointers, samplePointers',
-      ref: 'sampleRef.com, sampleRef.co',
-      completed: false,
-      id: 0
-    }, {
-      title: 'sampleTitle2',
-      desc: 'sampleDescription2',
-      pointers: 'samplePointers, samplePointers, samplePointers2',
-      ref: 'sampleRef2.com, sampleRef2.co',
-      completed: false,
-      id: 1
-    }]
-  }]
+  list: [
+    //   {
+    //   listName: 'random',
+    //   len: 1,
+    //   id: 0,
+    //   data: [{
+    //     title: 'sampleTitle',
+    //     desc: 'sampleDescription',
+    //     pointers: 'samplePointers, samplePointers, samplePointers,inters, samplePointers,inters, samplePointers,interlePointers, samplePointers,inters, samplePointers,inters, samplePointers,inters, samplePointers,inters, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers, samplePointers',
+    //     ref: 'sampleRef.com, sampleRef.co',
+    //     completed: true,
+    //     id: 0
+    //   }, {
+    //     title: 'sampleTitle2',
+    //     desc: 'sampleDescription2',
+    //     pointers: 'samplePointers, samplePointers, samplePointers2',
+    //     ref: 'sampleRef2.com, sampleRef2.co',
+    //     completed: false,
+    //     id: 1
+    //   }]
+    // },
+    // {
+    //   listName: 'secondRandom',
+    //   len: 1,
+    //   id: 1,
+    //   data: [{
+    //     title: 'sampleTitle',
+    //     desc: 'sampleDescription',
+    //     pointers: 'samplePointers, samplePointers, samplePointers',
+    //     ref: 'sampleRef.com, sampleRef.co',
+    //     completed: false,
+    //     id: 0
+    //   }, {
+    //     title: 'sampleTitle2',
+    //     desc: 'sampleDescription2',
+    //     pointers: 'samplePointers, samplePointers, samplePointers2',
+    //     ref: 'sampleRef2.com, sampleRef2.co',
+    //     completed: false,
+    //     id: 1
+    //   }]
+    // }
+  ]
 }
 
 // Create A Context
@@ -124,7 +126,7 @@ export const GlobalProvider = ({ children }) => {
   }
 
   function deleteAllTodo({ listId }) {
-    console.log("INCOMING listId : ", listId)
+    // console.log("INCOMING listId : ", listId)
     dispatch({
       type: 'DELETE_ALL_TODO',
       payload: {
@@ -159,9 +161,19 @@ export const GlobalProvider = ({ children }) => {
     })
   }
 
+  // function setFromLocal(stateFromLocal) {
+  //   console.log("stateFromLocal : ", stateFromLocal);
+  //   dispatch({
+  //     type: 'SET_FROM_LOCAL',
+  //     payload: {
+  //       stateFromLocal: stateFromLocal
+  //     }
+  //   })
+  // }
 
   return (
     <GlobalContext.Provider value={{
+      initialState,
       list: state.list,
       selectedList: state.selectedList,
       viewNotCompleted: state.viewNotCompleted,
@@ -174,7 +186,8 @@ export const GlobalProvider = ({ children }) => {
       deleteTodo,
       deleteAllTodo,
       editTodo,
-      showTodoToggle
+      showTodoToggle,
+      // setFromLocal
     }}>
       {children}
     </GlobalContext.Provider>

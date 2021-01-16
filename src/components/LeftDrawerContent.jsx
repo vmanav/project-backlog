@@ -1,14 +1,9 @@
 import React, { useState, useContext } from 'react';
 import {
-  Container, Grid, makeStyles, Paper, Button, FormControl, Chip, Snackbar, Dialog, ListItemAvatar, Avatar, DialogTitle, ButtonGroup, Input, Tooltip, InputLabel, TextareaAutosize, FormControlLabel,
-  Checkbox, InputAdornment, useTheme, TextField, CssBaseline, AppBar, Toolbar, ListItemText, IconButton, Drawer, Typography, Divider, List, ListItem, ListItemIcon
+  makeStyles, Chip, Box, Tooltip, ListItemText, IconButton, Divider, List, ListItem, ListItemIcon
 } from '@material-ui/core';
-import { Check, Menu, Inbox, Mail, ChevronLeft, Delete, ChevronRight, Close, Person, Add, Edit, CheckBox, ViewComfy } from '@material-ui/icons';
-import { ToggleButton } from '@material-ui/lab';
-import MuiAlert from '@material-ui/lab/Alert';
+import { Delete, Add } from '@material-ui/icons';
 
-import { yellow } from '@material-ui/core/colors';
-import clsx from 'clsx';
 import NewListDialog from './NewListDialog';
 
 import { GlobalContext } from '../context/GlobalState';
@@ -37,7 +32,7 @@ export default function LeftDrawerContent() {
 
   const { list, deleteList, setSelectedList, deleteAllLists } = useContext(GlobalContext);
 
-  console.log("LIST IN LEFT DRAWER: ", list);
+  // console.log("LIST IN LEFT DRAWER: ", list);
   const listNames = list.map((l) => {
     return {
       listName: l.listName,
@@ -50,7 +45,7 @@ export default function LeftDrawerContent() {
     setnewListModalOpen(true);
   };
 
-  const handleNewListModalClose = (value) => {
+  const handleNewListModalClose = () => {
     setnewListModalOpen(false);
   };
 
@@ -74,19 +69,16 @@ export default function LeftDrawerContent() {
 
   return (
     <>
-      <div className={classes.drawerHeader}>
-        <Typography>
-          <Chip
-            variant="outlined"
-            onClick={handleChipClick}
-            label="Project - Backlog"
-          />
-        </Typography>
-        {/* <IconButton>
-          <ChevronLeft />
-        </IconButton> */}
-      </div>
+      <Box className={classes.drawerHeader}>
+        <Chip
+          variant="outlined"
+          onClick={handleChipClick}
+          label="Project - Backlog"
+        />
+      </Box>
+
       <Divider />
+
       <List>
         {/* <Tooltip title="Delete All" placement="right" arrow> */}
         <ListItem button key={Delete} onClick={handleDeleteAll}>
@@ -129,6 +121,7 @@ export default function LeftDrawerContent() {
       </List>
 
       <StrongDivider />
+
       <List>
         <ListItem button key={'New List'} onClick={handleNewListModalOpen} >
           <ListItemIcon>

@@ -1,11 +1,8 @@
 import React, { useState, useContext } from 'react';
 import {
-	Container, Grid, makeStyles, Paper, Button, FormControl, ButtonGroup, Input, InputLabel, TextareaAutosize, FormControlLabel,
-	Checkbox, InputAdornment, useTheme, TextField, CssBaseline, AppBar, Toolbar, ListItemText, IconButton, Drawer, Typography, Divider, List, ListItem, ListItemIcon
+	makeStyles, CssBaseline, AppBar, Toolbar, IconButton, Drawer, Typography, Box
 } from '@material-ui/core';
-import { Check, Menu, Inbox, Mail, ChevronLeft, Delete, ChevronRight, Add, Edit, CheckBox, ViewComfy } from '@material-ui/icons';
-import { ToggleButton } from '@material-ui/lab';
-import { yellow } from '@material-ui/core/colors';
+import { Menu } from '@material-ui/icons';
 import clsx from 'clsx';
 
 import LeftDrawerContent from './LeftDrawerContent';
@@ -82,7 +79,7 @@ export default function DrawerComponent() {
 	const [open, setOpen] = useState(true);
 
 	const { selectedList, list } = useContext(GlobalContext);
-	console.log("Selected List Id : ", selectedList)
+	// console.log("Selected List Id : ", selectedList)
 
 
 	const classes = useStyles();
@@ -112,7 +109,7 @@ export default function DrawerComponent() {
 						<Menu />
 					</IconButton>
 					{/* TopNavBar ListName */}
-					<Typography noWrap>
+					<Box>
 						{selectedList === (-1) ?
 							(
 								<Typography variant="h6" display="block" gutterBottom>
@@ -125,7 +122,7 @@ export default function DrawerComponent() {
 								</Typography>
 							)
 						}
-					</Typography>
+					</Box>
 				</Toolbar>
 			</AppBar>
 

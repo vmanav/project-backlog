@@ -161,15 +161,15 @@ export const GlobalProvider = ({ children }) => {
     })
   }
 
-  // function setFromLocal(stateFromLocal) {
-  //   console.log("stateFromLocal : ", stateFromLocal);
-  //   dispatch({
-  //     type: 'SET_FROM_LOCAL',
-  //     payload: {
-  //       stateFromLocal: stateFromLocal
-  //     }
-  //   })
-  // }
+  function setFromLocal(stateFromLocal) {
+    console.log("stateFromLocal : ", stateFromLocal);
+    dispatch({
+      type: 'SET_FROM_LOCAL',
+      payload: {
+        stateFromLocal: stateFromLocal
+      }
+    })
+  }
 
   return (
     <GlobalContext.Provider value={{
@@ -187,7 +187,7 @@ export const GlobalProvider = ({ children }) => {
       deleteAllTodo,
       editTodo,
       showTodoToggle,
-      // setFromLocal
+      setFromLocal
     }}>
       {children}
     </GlobalContext.Provider>

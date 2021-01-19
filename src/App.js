@@ -7,44 +7,43 @@ import { GlobalProvider, GlobalContext } from './context/GlobalState';
 
 function App() {
 
-  // const { initialState, list, setFromLocal } = useContext(GlobalContext);
+  const { initialState, list, setFromLocal } = useContext(GlobalContext);
 
-  // const [todoList] = useState(list)
-  // console.log("--todoList : ", todoList);
+  console.log("--list : ", list);
 
-  // useEffect(() => {
-  //   getFromLocal();
-  // }, [])
+  useEffect(() => {
+    getFromLocal();
+  }, [])
+
+  const saveToLocal = () => {
+    console.log("saveToLocal CALLED");
+    localStorage.setItem('pBData', JSON.stringify({ initialState }));
+  }
 
   // useEffect(() => {
   //   saveToLocal();
-  // }, [todoList])
+  // }, [list])
 
-  // console.log("Initial State => ", initialState);
+  console.log("Initial State => ", initialState);
 
-  // const saveToLocal = () => {
-  //   console.log("saveToLocal CALLED");
-  //   localStorage.setItem('pBData', JSON.stringify({ initialState }));
-  // }
-
-  // const getFromLocal = () => {
-  //   console.log("getFromLocal CALLED");
-  //   if (localStorage.getItem('pBData') === null) {
-  //     console.log("LOCAL STORAGE NOT FOUND");
-  //     localStorage.setItem('pBData', JSON.stringify({
-  //       initialState: {
-  //         selectedList: -1,
-  //         llen: 1,
-  //         viewNotCompleted: true,
-  //         list: []
-  //       }
-  //     }))
-  //   } else {
-  //     console.log("LOCAL STORAGE  FOUND");
-  //     const pBDataFromLocal = JSON.parse(localStorage.getItem('pBData'));
-  //     setFromLocal(pBDataFromLocal);
-  //   }
-  // }
+  const getFromLocal = () => {
+    console.log("getFromLocal CALLED");
+    if (localStorage.getItem('pBData') === null) {
+      console.log("LOCAL STORAGE NOT FOUND");
+      localStorage.setItem('pBData', JSON.stringify({
+        initialState: {
+          selectedList: -1,
+          llen: 1,
+          viewNotCompleted: true,
+          list: []
+        }
+      }))
+    } else {
+      console.log("LOCAL STORAGE  FOUND");
+      const pBDataFromLocal = JSON.parse(localStorage.getItem('pBData'));
+      setFromLocal(pBDataFromLocal);
+    }
+  }
 
   return (
     <div className="App">

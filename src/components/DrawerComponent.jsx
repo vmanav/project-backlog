@@ -1,12 +1,13 @@
 import React, { useState, useContext } from 'react';
 import {
-	makeStyles, CssBaseline, AppBar, Toolbar, IconButton, Drawer, Typography, Box
+	makeStyles, CssBaseline, AppBar, Toolbar, IconButton, Button, Icon, Drawer, Typography, Box
 } from '@material-ui/core';
 import { Menu } from '@material-ui/icons';
 import clsx from 'clsx';
 
 import LeftDrawerContent from './LeftDrawerContent';
 import AppContainer from './AppContainer';
+import { green } from '@material-ui/core/colors';
 
 import { GlobalContext } from '../context/GlobalState';
 
@@ -66,7 +67,10 @@ const useStyles = makeStyles((theme) => ({
 		}),
 		marginLeft: 0,
 	},
-
+	saveButton: {
+		backgroundColor: green[500],
+		// color: white[500]
+	},
 	// For Content
 	paper: {
 		padding: theme.spacing(2),
@@ -78,9 +82,13 @@ const useStyles = makeStyles((theme) => ({
 export default function DrawerComponent() {
 	const [open, setOpen] = useState(true);
 
-	const { selectedList, list } = useContext(GlobalContext);
+	const { selectedList, list, initialState } = useContext(GlobalContext);
 	// console.log("Selected List Id : ", selectedList)
 
+	const handleSave = () => {
+		// console.log("Saving State : ", initialState);
+		localStorage.setItem('pBData', JSON.stringify({ initialState }));
+	}
 
 	const classes = useStyles();
 
@@ -123,6 +131,15 @@ export default function DrawerComponent() {
 							)
 						}
 					</Box>
+					<Button
+						variant="outlined"
+						className={classes.saveButton}
+						// color="secondary"
+						color="text.secondary"
+						onClick={handleSave}
+					>
+						Save
+					</Button>
 				</Toolbar>
 			</AppBar>
 

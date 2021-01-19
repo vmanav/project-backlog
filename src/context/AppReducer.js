@@ -128,15 +128,24 @@ export default (state, action) => {
       }
     }
 
-    // case 'SET_FROM_LOCAL': {
-    //   console.log("action.payload.stateFromLocal =-> ", action.payload.stateFromLocal);
-    //   return { ...state }
-    // }
-    // case 'ADD_TRANSACTION':
-    //   return {
-    //     ...state,
-    //     transactions: [action.payload, ...state.transactions]
-    //   }
+    case 'SET_FROM_LOCAL': {
+      console.log("action.payload.stateFromLocal =-> ", action.payload.stateFromLocal.initialState);
+      const obj = action.payload.stateFromLocal.initialState;
+      return {
+        ...state,
+        selectedList: obj.selectedList,
+        llen: obj.llen,
+        viewNotCompleted: obj.viewNotCompleted,
+        list: obj.list,
+        // ...action.payload.stateFromLocal.initialState
+      }
+    }
+
+    case 'ADD_TRANSACTION':
+      return {
+        ...state,
+        transactions: [action.payload, ...state.transactions]
+      }
     default: return state
   }
 }
